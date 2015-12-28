@@ -1,15 +1,42 @@
 <html>
   <head>
+    <style>
+      .left {
+        width: 50%;
+        float: left;
+      }
+      .left, .right {
+        font-size: 200px;
+      }
+      .right {
+        width: 50%;
+        float: right;
+      }
+      .row {
+        width: 100%;
+      }
+      span {
+        color: red;
+      }
+    </style>
   </head>
   <body>
     <div id="stepContainer">
       <div class="left">
-        Front <span>{{left.front}}</span>
-        Heel <span>{{left.heel}}</span>
+        <div class="row">
+          Front <span>{{left.front}}</span>
+        </div>
+        <div class="row">
+          Heel <span>{{left.heel}}</span>
+        </div>
       </div>
       <div class="right">
-        Front <span>{{right.front}}</span>
-        Heel <span>{{right.heel}}</span>
+        <div class="row">
+          Front <span>{{right.front}}</span>
+        </div>
+        <div class="row">
+          Heel <span>{{right.heel}}</span>
+        </div>
       </div>
     </div>
     <script src="/vue.js"></script>

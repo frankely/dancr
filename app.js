@@ -5,6 +5,10 @@ var shoes = {
     right: { heel: 0, front: 0 }
 };
 
+var isStanding = function() {
+
+};
+
 socket.on('left step', function(step) {
   shoes.left = step;
 });
