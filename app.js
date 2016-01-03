@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:8080');
+var socket = io.connect('http://192.168.0.16:8080/');
 
 var shoes = {
     left: { heel: 0, front: 0 },
@@ -9,12 +9,12 @@ var isStanding = function() {
 
 };
 
-socket.on('left step', function(step) {
-  shoes.left = step;
+socket.on('left front step', function(step) {
+  shoes.left.front = step;
 });
 
-socket.on('right step', function(step) {
-  shoes.right = step;
+socket.on('left heel step', function(step) {
+  shoes.left.heel = step;
 });
 
 

@@ -20,25 +20,48 @@ app.get('/', function (req, res) {
 });
 
 // Step Processor
-io.on('connection', function (socket) {
-  board.on("ready",function(){
 
-    var leftFront = new five.Sensor({
-      pin: "A0",
-      freq: 25
-    });
+board.on("ready",function(){
+  console.log("shoes ready");
+
+  var leftFront = new five.Sensor({
+    pin: "A0",
+    freq: 25
+  });
+
+  var leftHeel = new five.Sensor({
+    pin: "A1",
+    freq: 25
+  });
+
+  io.on('connection', function (socket) {
+
+    console.log("viewer connected");
 
     var leftFrontForce = 0;
+    var leftHeelForce = 0;
 
     leftFront.scale([0,255]).on("data",function(){
       if (this.scaled != leftFrontForce) {
         leftFrontForce = this.scaled;
-
-        if (leftFrontForce > 20) {
-          socket.emit('left step', { front: 1, heel: 0 });
+        socket.emit('left front step', leftFrontForce);
+        /*if (leftFrontForce > 20) {
+          socket.emit('left front step', leftFrontForce);
         } else {
-          socket.emit('left step', { front: 0, heel: 0 });
-        }
+          socket.emit('left front step', 0);
+        }*/
+      }
+    });
+
+    leftHeel.scale([0,255]).on("data",function(){
+      if (this.scaled != leftHeelForce) {
+        leftHeelForce = this.scaled;
+        socket.emit('left heel step', leftHeelForce);
+        /*if (leftHeelForce > 20) {
+          socket.emit('left heel step', 1);
+        } else {
+          socket.emit('left heel step', 0);
+        }*/
       }
     });
   });
